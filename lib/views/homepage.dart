@@ -92,19 +92,23 @@ class _MyHomePageState extends State<MyHomePage> {
               GridView.builder(
                 shrinkWrap: true,
                 padding: EdgeInsets.symmetric(
-                  horizontal: 20.0,
+                  horizontal: 16.0,
                 ),
                 itemCount: optionsList.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
-                  mainAxisExtent: 75.0,
+                  mainAxisExtent: 70.0,
                 ),
                 itemBuilder: (context, index) {
                   return Center(
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        setState(() {
+                          selectedOption = optionsList[index];
+                        });
+                      },
                       child: Stack(
                         children: [
                           Container(
@@ -113,7 +117,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             height: 100.0,
                             decoration: BoxDecoration(
                               color: ColorConst.gridCardColor,
-                              borderRadius: BorderRadius.circular(10.0),
+                              border: Border.all(
+                                color: selectedOption == optionsList[index]
+                                    ? ColorConst.primaryColor
+                                    : ColorConst.gridCardColor,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -121,9 +131,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Container(
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                        color: Colors.white,
+                                        color:
+                                            selectedOption == optionsList[index]
+                                                ? ColorConst.primaryColor
+                                                : ColorConst.gridCardColorText,
                                         width: 1,
                                       ),
+                                      color:
+                                          selectedOption == optionsList[index]
+                                              ? ColorConst.primaryColor
+                                              : null,
                                       shape: BoxShape.circle),
                                   padding: EdgeInsets.all(4),
                                   child: Text(
@@ -135,7 +152,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                         .toUpperCase(),
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: ColorConst.gridCardColorText,
+                                      color:
+                                          selectedOption == optionsList[index]
+                                              ? Colors.white
+                                              : ColorConst.gridCardColorText,
                                     ),
                                   ),
                                 ),
@@ -161,6 +181,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },
               ),
+              SizedBox(
+                height: 8,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -174,8 +197,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
+                          // padding: EdgeInsets.o
                           onPressed: () {},
                           icon: WebsafeSvg.asset(
                             ImageConst.microphone,
@@ -183,6 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         IconButton(
+                          padding: EdgeInsets.all(0),
                           onPressed: () {},
                           icon: WebsafeSvg.asset(
                             ImageConst.nextbutton,
