@@ -1,0 +1,1 @@
+ /Users/mac/Developer/freelance/cleanUI/.dart_tool/flutter_build/82c6f26608a2942f28d7f463d6c2aee3/native_assets.yaml: 
